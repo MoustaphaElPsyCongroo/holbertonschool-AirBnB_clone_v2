@@ -57,8 +57,7 @@ class Place(BaseModel, Base):
 
         @property
         def amenities(self):
-            from models import storage
-            return [amenity for amenity in storage.all(Amenity).values()
+            return [amenity for amenity in self.amenity_ids
                     if self.id == amenity.id]
 
         @amenities.setter
