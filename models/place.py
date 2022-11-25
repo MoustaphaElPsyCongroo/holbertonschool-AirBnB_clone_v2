@@ -10,9 +10,11 @@ from os import getenv
 
 place_amenity = Table("place_amenity", Base.metadata,
                       Column(
-                          "place_id", String(60), ForeignKey("places.id")),
+                          "place_id", String(60), ForeignKey("places.id"),
+                          nullable=False, primary_key=True),
                       Column(
-                          "amenity_id", String(60), ForeignKey("amenities.id"))
+                          "amenity_id", String(60), ForeignKey("amenities.id"),
+                          nullable=False, primary_key=True)
                       )
 
 
@@ -43,9 +45,10 @@ class Place(BaseModel, Base):
 
         amenities = relationship(
             "Amenity",
-            back_populates="place_amenities",
             secondary="place_amenity",
-            viewonly=False)
+            viewonly=False,
+            back_populates="place_amenities"
+        )
     else:
         @property
         def cities(self):
