@@ -2,10 +2,18 @@
 """ Place Module for HBNB project """
 from models.base_model import BaseModel, Base
 from models.review import Review
-from sqlalchemy import Column, Integer, String, Float
+from models.amenity import Amenity
+from sqlalchemy import Table, Column, Integer, String, Float
 from sqlalchemy import ForeignKey
 from sqlalchemy.orm import relationship
 from os import getenv
+
+place_amenity = Table("place_amenity", Base.metadata,
+                      Column(
+                          "place_id", String(60), ForeignKey("places.id")),
+                      Column(
+                          "amenity_id", String(60), ForeignKey("amenities.id"))
+                      )
 
 
 class Place(BaseModel, Base):
@@ -32,6 +40,12 @@ class Place(BaseModel, Base):
     if getenv("HBNB_TYPE_STORAGE") == "db":
         reviews = relationship(
             "Review", back_populates="place", cascade="all, delete")
+
+        amenities = relationship(
+            "Amenity",
+            back_populates="place_amenities",
+            secondary="place_amenity",
+            viewonly=False)
     else:
         @property
         def cities(self):
@@ -40,3 +54,14 @@ class Place(BaseModel, Base):
             from models import storage
             return [review for review in storage.all(Review).values()
                     if self.id == review.place_id]
+
+        @property
+        def amenities(self):
+            from models import storage
+            return [amenity for amenity in storage.all(Amenity).values()
+                    if self.id == amenity.id]
+
+        @amenities.setter
+        def amenities(self, obj):
+            if isinstance(obj, Amenity):
+                self.amenity_ids.append(obj.id)
