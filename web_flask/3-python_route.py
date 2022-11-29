@@ -1,5 +1,5 @@
 #!/usr/bin/python3
-"""Flask web app with variable route with underscore handling"""
+"""Underscore handling"""
 from flask import Flask
 app = Flask(__name__)
 app.url_map.strict_slashes = False
