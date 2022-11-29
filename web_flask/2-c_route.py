@@ -1,6 +1,5 @@
 #!/usr/bin/python3
 """Flask web app with 3 routes & one variable"""
-
 from flask import Flask
 
 app = Flask(__name__)
