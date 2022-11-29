@@ -1,5 +1,5 @@
 #!/usr/bin/python3
-"""Integer module"""
+""" Integer module """
 
 from flask import Flask
 app = Flask(__name__)
