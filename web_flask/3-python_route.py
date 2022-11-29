@@ -1,5 +1,5 @@
 #!/usr/bin/python3
-"""Flask web app with 3 routes & one variable"""
+"""Flask web app with variable route with underscore handling"""
 from flask import Flask
 app = Flask(__name__)
 app.url_map.strict_slashes = False
@@ -20,7 +20,13 @@ def hbnb():
 @app.route('/c/<text>')
 def c_is_fun(text):
     """Prints the <text> variable"""
-    return f"C {text}"
+    return f"C {text.replace('_', ' ')}"
+
+
+@app.route('/python/<text>')
+def pyth(text):
+    """Prints <text>"""
+    return f"Python {text.replace('_', ' ')}"
 
 
 if __name__ == "__main__":
