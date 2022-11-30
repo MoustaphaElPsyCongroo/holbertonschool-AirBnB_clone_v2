@@ -45,8 +45,8 @@ class DBStorage:
                    "Review": Review, "Amenity": Amenity}
 
         if cls is not None:
-            for instance in self.__session.query(classes[cls]).all():
-                key = f"{classes[cls].__name__}.{instance.id}"
+            for instance in self.__session.query(cls).all():
+                key = f"{cls.__name__}.{instance.id}"
                 results[key] = instance
         else:
             for cl in classes.keys():
@@ -79,4 +79,4 @@ class DBStorage:
 
     def close(self):
         """Closes the session"""
-        self.__session.remove()
+        self.__session.close()
