@@ -62,3 +62,7 @@ class FileStorage:
             FileStorage.__objects.pop(
                 f"{obj.__class__.__name__}.{obj.id}", None)
             # del(FileStorage.__objects[f"{obj.__class__.__name__}.{obj.id}"])
+
+    def close(self):
+        """Deserializes the JSON file"""
+        self.reload()
