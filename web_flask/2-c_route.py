@@ -20,7 +20,7 @@ def hbnb():
 @app.route('/c/<text>')
 def c_is_fun(text):
     """Prints the <text> variable"""
-    return f"C {text}"
+    return "C".format(text)
 
 
 if __name__ == "__main__":
