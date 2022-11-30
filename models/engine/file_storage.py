@@ -59,9 +59,9 @@ class FileStorage:
     def delete(self, obj=None):
         """Deletes the specified object from models currently in storage"""
         if obj is not None:
-            FileStorage.__objects.pop(
-                f"{obj.__class__.__name__}.{obj.id}", None)
-            # del(FileStorage.__objects[f"{obj.__class__.__name__}.{obj.id}"])
+            # FileStorage.__objects.pop(
+            #     f"{obj.__class__.__name__}.{obj.id}", None)
+            del (FileStorage.__objects[f"{obj.__class__.__name__}.{obj.id}"])
 
     def close(self):
         """Deserializes the JSON file"""
