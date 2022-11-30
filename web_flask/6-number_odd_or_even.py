@@ -20,20 +20,20 @@ def hbnb():
 @app.route('/c/<text>')
 def c_is_fun(text):
     """Prints the <text> variable"""
-    return f"C {text.replace('_', ' ')}"
+    return "C {}".format(text.replace('_', ' '))
 
 
 @app.route('/python')
 @app.route('/python/<text>')
 def pyth(text="is cool"):
     """Prints <text>"""
-    return f"Python {text.replace('_', ' ')}"
+    return "Python {}".format(text.replace('_', ' '))
 
 
 @app.route('/number/<int:n>')
 def num(n):
     """Prints n if it's an int"""
-    return f"{n} is a number"
+    return "{} is a number".format(n)
 
 
 @app.route('/number_template/<int:n>')
